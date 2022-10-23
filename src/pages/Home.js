@@ -9,7 +9,8 @@ function Home() {
     const [currencyData, setCurrencyData] = useState({});
     const [holidayData, setHolidayData] = useState({});
     const [searchParams] = useSearchParams();
-    const [country, setCountry] = useState('Canada'); 
+    const [country, setCountry] = useState('CA');
+    const [currency, setCurrency] = useState('CAD'); 
     let dateToday = new Date().toISOString().slice(0,10);
     let currentYear = new Date().getFullYear();
 
@@ -20,8 +21,10 @@ function Home() {
 useEffect(() => {
     const countryToQuery = searchParams.get("country") || country;
     setCountry(countryToQuery);
+    const currencyToQuery = searchParams.get("currency") || currency;
+    setCurrency(currencyToQuery);
     axios
-        .get(`https://calendarific.com/api/v2/holidays?&api_key=${HOLIDAY_API_KEY}&country=CA&year=${currentYear}`)
+        .get(`https://calendarific.com/api/v2/holidays?&api_key=${HOLIDAY_API_KEY}&country=${countryToQuery}&year=${currentYear}`)
         .then(function (response) {
             setHolidayData(response.data.response.holidays);
             // console.log("response", response);
@@ -30,16 +33,18 @@ useEffect(() => {
             console.warn(error);
             setHolidayData({});
         });
-    // axios
-    //     .get(`https://www.amdoren.com/api/currency.php?api_key=${CURRENCY_API_KEY}=USD&to=EUR`)
-    //     .then(function (response) {
-    //         setCurrencyData(response);
-    //         console.log("response", response);
-    //     })
-    //     .catch(function (error) {
-    //         console.warn(error);
-    //         setCurrencyData({});
-    //     });
+    axios
+        .get(`https://v6.exchangerate-api.com/v6/${CURRENCY_API_KEY}/latest/${currency}`)
+        .then(function (response) {
+            setCurrencyData(response.data.conversion_rates.USD);
+            console.log(currency);
+            console.log("currency response", currencyData);
+            console.log("currency", response.data.conversion_rates.USD)
+        })
+        .catch(function (error) {
+            console.warn(error);
+            setCurrencyData({});
+        });
     }, []);
     // console.log("holiday data", holidayData);
     // console.log("holiday", holidayData);
@@ -55,6 +60,7 @@ useEffect(() => {
             console.log("none today");
         }
     };
+
 }
 
 export default Home;
