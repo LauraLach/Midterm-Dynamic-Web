@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import { CURRENCY_API_KEY, HOLIDAY_API_KEY } from "../API_KEYS";
+import Header from '../components/Header';
 // import WeatherCard from '../components/WeatherCard';
-// import Header from '../components/Header';
 
 function Home() {
     const [currencyData, setCurrencyData] = useState({});
@@ -36,30 +36,35 @@ useEffect(() => {
     axios
         .get(`https://v6.exchangerate-api.com/v6/${CURRENCY_API_KEY}/latest/${currency}`)
         .then(function (response) {
-            setCurrencyData(response.data.conversion_rates.USD);
-            console.log(currency);
-            console.log("currency response", currencyData);
-            console.log("currency", response.data.conversion_rates.USD)
+            const responseUndefinedTest = response.data && response.data.conversion_rates;
+            const usdRate = responseUndefinedTest && responseUndefinedTest.USD;
+            setCurrencyData(usdRate);
         })
         .catch(function (error) {
             console.warn(error);
             setCurrencyData({});
         });
     }, []);
-    // console.log("holiday data", holidayData);
-    // console.log("holiday", holidayData);
-    // console.log("holiday today", holidayData[0]);
-    // console.log("date", dateToday);
+    console.log("currency response", currencyData);
 
-    //PUT FOR LOOP IN UseMEMO!!
-    for(let i = 0; i < holidayData.length; i++) {
-        if(holidayData[i].date.iso == dateToday) {
-            console.log(holidayData[i].name);
-        }
-        else {
-            console.log("none today");
-        }
-    };
+    const holidayToday = useMemo(() => {
+        for(let i = 0; i < holidayData.length; i++) {
+            if(holidayData[i].date.iso == dateToday) {
+                // console.log(holidayData[i].name);
+                return holidayData[i].name;
+            }
+            else {
+                // console.log("none today");
+                return "None";
+            }
+        };
+    }, [holidayData]);
+
+    return (
+        <div className="App">
+            <Header />
+            <h1 className="appTitle">TEST</h1>
+        </div>);
 
 }
 
