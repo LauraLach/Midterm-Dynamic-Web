@@ -47,11 +47,8 @@ useEffect(() => {
 
     const holidayToday = useMemo(() => {
         for(let i = 0; i < holidayData.length; i++) {
-            if(holidayData[i].date.iso == dateToday) {
+            if(holidayData[i].date.iso === dateToday) {
                 return holidayData[i].name;
-            }
-            else {
-                return "None";
             }
         };
     }, [holidayData]);
@@ -63,7 +60,7 @@ useEffect(() => {
                 country={country}
                 currencyRate={Math.round(currencyData * 100) / 100}
                 currencyType={currency}
-                holiday={holidayToday}
+                holiday={holidayToday || "None"}
             />
         </div>);
 }
