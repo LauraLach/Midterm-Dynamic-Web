@@ -1,7 +1,7 @@
 import React from "react";
 
 function LocationInfo( {country, currencyRate, currencyType, holiday} ) {
-    return(
+    return (
     <div className="infoWrapper">
         <div className="heroText">
             <h2>Travel to</h2>
@@ -10,7 +10,7 @@ function LocationInfo( {country, currencyRate, currencyType, holiday} ) {
         <div className="locationInfo">
             <div className="currencyInfo">
                 <h2>Currency type: {currencyType}</h2>
-                <h2>1 {currencyType} = {currencyRate.toString()} USD</h2>
+                <h2>1 {currencyType} = {currencyRate} USD</h2>
             </div>
             <div className="holidayInfo">
                 <h2>Holiday today:</h2>

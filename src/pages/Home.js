@@ -37,7 +37,7 @@ useEffect(() => {
         .then(function (response) {
             const responseUndefinedTest = response.data && response.data.conversion_rates;
             const usdRate = responseUndefinedTest && responseUndefinedTest.USD;
-            setCurrencyData(usdRate.toFixed(2));
+            setCurrencyData(usdRate);
             console.log("response", response);
         })
         .catch(function (error) {
@@ -62,7 +62,7 @@ useEffect(() => {
             <Header />
             <LocationInfo 
                 country={country}
-                currencyRate={currencyData}
+                currencyRate={Math.round(currencyData * 100) / 100}
                 currencyType={currency}
                 holiday={holidayToday}
             />
