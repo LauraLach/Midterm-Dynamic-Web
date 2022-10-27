@@ -38,7 +38,6 @@ useEffect(() => {
             const responseUndefinedTest = response.data && response.data.conversion_rates;
             const usdRate = responseUndefinedTest && responseUndefinedTest.USD;
             setCurrencyData(usdRate);
-            console.log("response", response);
         })
         .catch(function (error) {
             console.warn(error);
