@@ -1,6 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Aleo:ital@0;1&family=Dancing+Script:wght@600;700&display=swap");
+
 * {
   box-sizing: border-box;
+  font-family: "Aleo", sans-serif;
 }
 .header {
   display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  justify-content: flex-end;
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 10px 0px 2px 0px;
+}
+.header a {
+  color: #fff;
+  margin-right: 15px;
+  text-decoration: none;
+}
+.header a:visited {
+  color: #fff;
+}
+.header a:hover,
+.header a:active {
+  color: #d6e0e2;
+}
+.infoWrapper {
+  background-color: #fff;
+  border: 10px #487e8a double;
+  border-radius: 20px;
+  color: #0b5f70;
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 35px;
+}
+.heroText {
+  display: flex;
+  flex-flow: column;
+  margin-right: 35px;
+}
+.heroText h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 100px;
+  font-weight: 600;
+  line-height: 0.7;
+  margin: 0 auto 50px auto;
+}
+.heroText h2 {
+  font-size: 60px;
+  font-weight: 600;
+  margin: 0 auto;
+}
+.locationInfo {
+  display: flex;
+  font-size: 25px;
+  justify-content: space-around;
+}
+.locationInfo h2 {
+  margin: 10px;
+}
+.App {
+  background-color: #487e8a;
+  min-height: 100vh;
 }
